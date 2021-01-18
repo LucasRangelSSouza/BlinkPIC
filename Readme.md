@@ -29,7 +29,8 @@ De acordo com o simulador MPLAB v8.92, se utilizado um cristal de 4Khz temos os 
 
 
 Os dados da tabela acima podem ser conferidos na simulação apresentada no gif abaixo
-[](https://github.com/LucasRangelSSouza/BlinkPIC/blob/main/gifs/testPic.gif)
+
+![](https://github.com/LucasRangelSSouza/BlinkPIC/blob/main/gifs/testPic.gif)
  
  
  No geral sao executadas 5086 instruções em 5 segundos e 86 milissegundo em 10 loops do programa, o que nos da uma media de 508 milisegundos e 600 microssegundos por loop e 1 milisegundo por instrução.
