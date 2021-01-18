@@ -2,9 +2,6 @@
 
 # Programa: Blink (PIC)
 
-
-
-
 Esse código é um exemplo de Led Blink (piscar led) desenvolvido por discentes do IFG para o microcontrolador PIC16F84A, este codigo em especifico pisca o led a cada 0.5 segundos se utilizado um cristal de 4 Khz.
 
 ## Execuçao:
@@ -21,21 +18,21 @@ Grave o arquivo Blink.hex em um pic
 
 ## Codigo:
 ```
-list		p=16f84A								; Indica o microcontrolador que sera utilizado
+list		p=16f84A			; Indica o microcontrolador que sera utilizado
 
-#INCLUDE <P16F84A.INC> 								; Adiciona biblioteca de mapeamento de mem?ria
+#INCLUDE <P16F84A.INC>			; Adiciona biblioteca de mapeamento de mem?ria
 
-__config _XT_OSC & _WDT_OFF & _PWRTE_ON & _CP_OFF	;Realiza as configuraçoes iniciais
+__config _XT_OSC & _WDT_OFF & _PWRTE_ON & _CP_OFF			;Realiza as configuraçoes iniciais
 
 
-org b'0'            ;Indica onde o vetor da pilha vai ser iniciado.
+org b'0'			;Indica onde o vetor da pilha vai ser iniciado.
 
 goto CONFIGURANDO	;vai para o bloco "configurarando".
 
 ;---------------REGISTRADORES DE USO GERAL---------------
 
-cblock 0x0c			;Configura aux1 e aux2 como registradores de uso geral
-aux					;0Ch é o endereços de aux
+cblock 0x0c				;Configura aux1 e aux2 como registradores de uso geral
+aux						;0Ch é o endereços de aux
 endc
 
 
@@ -68,13 +65,14 @@ LOOP:
 ;---------------------BLOCO DELAY----------------------
 DELAY:
 
-	MOVLW	d'167'		;Manda 167 decimal para o registrador w.
+	MOVLW	d'167'	;Manda 167 decimal para o registrador w.
 	MOVWF	aux		;Manda o literal que est? em w para aux.
 
 ;---------------------BLOCO DELAYAUX----------------------
 DELAYAUX:
 
-	DECFSZ	aux,1		;Aguarda na linha, decrementando aux1 em 1 até que seja zero.(1 ciclos de maquina = 1us)
+	DECFSZ	aux,1		;Aguarda na linha, decrementando aux1 em 1 até que seja zero.
+						;(1 ciclos de maquina = 1us)
 	
 	GOTO DELAYAUX		;Retorna para DELAYAUX. (2 ciclos de maquina = 2us)
 				
