@@ -1,0 +1,228 @@
+MPASM  5.51                         BLINK.ASM   1-18-2021  19:31:30         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[205]: Found directive in column 1. (list)
+                      00001 list            p=16f84A                                                                ; Indica o micro
+                            controlador que sera utilizado
+                      00002 
+                      00003 #INCLUDE <P16F84A.INC>                                                          ; Adiciona biblioteca de
+                             mapeamento de mem?ria
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F84A processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      00208         LIST
+                      00004 
+Warning[205]: Found directive in column 1. (__config)
+2007   3FF1           00005 __config _XT_OSC & _WDT_OFF & _PWRTE_ON & _CP_OFF       ;Realiza as configuraçoes iniciais
+                      00006 
+                      00007 
+Warning[205]: Found directive in column 1. (org)
+0000                  00008 org b'0'            ;Indica onde o vetor da pilha vai ser iniciado.
+                      00009 
+Warning[203]: Found opcode in column 1. (goto)
+0000   2801           00010 goto CONFIGURANDO       ;vai para o bloco "configurarando".
+                      00011 
+                      00012 ;---------------REGISTRADORES DE USO GERAL---------------
+                      00013 
+Warning[205]: Found directive in column 1. (cblock)
+                      00014 cblock 0x0c                     ;Configura aux1 e aux2 como registradores de uso geral
+  0000000C            00015 aux                                     ;0Ch é o endereços de aux
+Warning[205]: Found directive in column 1. (ENDC)
+                      00016 endc
+                      00017 
+                      00018 
+                      00019 ;---------------------BLOCO CONFIG----------------------;
+0001                  00020 CONFIGURANDO:
+                      00021 
+0001   1683           00022         BSF STATUS, RP0     ;Seleciona o banco 1.
+                      00023         
+0002   30FE           00024         movLW   b'11111110' ;Move um literal para o registrador w.
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0003   0086           00025         movWF   TRISB       ;Move do registrador w para o registrador trisb.
+                      00026                                             ;Torna todos os ports B em input menos o PB0.
+                      00027                                                 ;O pino PB0 sera ligado ao led.
+                      00028                                                 
+0004   1283           00029         BCF STATUS,     RP0             ;escolhe o banco 0 onde está localizado o PortB.
+                      00030 
+                      00031 ;---------------------BLOCO LOOP----------------------
+                      00032 
+0005                  00033 LOOP:
+                      00034 
+0005   1406           00035         BSF PORTB, 0            ;Set no primeiro pino do port b(desliga LED).
+MPASM  5.51                         BLINK.ASM   1-18-2021  19:31:30         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00036         
+0006   200A           00037         call DELAY                      ;Chama subrotina delay.
+                      00038         
+0007   1006           00039         BCF PORTB, 0            ;Clear no primeiro pino do port b(liga LED).
+                      00040         
+0008   200A           00041         call DELAY                      ;Chama subrotina delay.
+                      00042         
+0009   2805           00043         goto LOOP                       ;Retorna pro LOOP
+                      00044 
+                      00045 ;---------------------BLOCO DELAY----------------------
+000A                  00046 DELAY:
+                      00047 
+000A   30A7           00048         MOVLW   d'167'          ;Manda 167 decimal para o registrador w.
+000B   008C           00049         MOVWF   aux             ;Manda o literal que est? em w para aux.
+                      00050 
+                      00051 ;---------------------BLOCO DELAYAUX----------------------
+000C                  00052 DELAYAUX:
+                      00053 
+000C   0B8C           00054         DECFSZ  aux,1           ;Aguarda na linha, decrementando aux1 em 1 até que seja zero.(1 ciclos d
+                            e maquina = 1us)
+                      00055         
+000D   280C           00056         GOTO DELAYAUX           ;Retorna para DELAYAUX. (2 ciclos de maquina = 2us)
+                      00057                                 
+                      00058 
+000E   0008           00059         RETURN 
+                      00060 
+Warning[205]: Found directive in column 1. (END)
+                      00061 END
+MPASM  5.51                         BLINK.ASM   1-18-2021  19:31:30         PAGE  3
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+C                                 00000000
+CONFIGURANDO                      00000001
+DC                                00000001
+DELAY                             0000000A
+DELAYAUX                          0000000C
+EEADR                             00000009
+EECON1                            00000088
+EECON2                            00000089
+EEDATA                            00000008
+EEIE                              00000006
+EEIF                              00000004
+F                                 00000001
+FSR                               00000004
+GIE                               00000007
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IRP                               00000007
+LOOP                              00000005
+NOT_PD                            00000003
+NOT_RBPU                          00000007
+NOT_TO                            00000004
+OPTION_REG                        00000081
+PCL                               00000002
+PCLATH                            0000000A
+PORTA                             00000005
+PORTB                             00000006
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RB0                               00000000
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+RD                                00000000
+RP0                               00000005
+RP1                               00000006
+STATUS                            00000003
+T0CS                              00000005
+MPASM  5.51                         BLINK.ASM   1-18-2021  19:31:30         PAGE  4
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISB                             00000086
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+W                                 00000000
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_CONFIG                           00002007
+_CP_OFF                           00003FFF
+_CP_ON                            0000000F
+_DEVID1                           00002006
+_FOSC_EXTRC                       00003FFF
+_FOSC_HS                          00003FFE
+_FOSC_LP                          00003FFC
+_FOSC_XT                          00003FFD
+_HS_OSC                           00003FFE
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_LP_OSC                           00003FFC
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_RC_OSC                           00003FFF
+_WDTE_OFF                         00003FFB
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FFD
+__16F84A                          00000001
+aux                               0000000C
+MPASM  5.51                         BLINK.ASM   1-18-2021  19:31:30         PAGE  5
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+
+0000 : XXXXXXXXXXXXXXX- ---------------- ---------------- ----------------
+2000 : -------X-------- ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:    15
+Program Memory Words Free:  1009
+
+
+Errors   :     0
+Warnings :     7 reported,     0 suppressed
+Messages :     1 reported,     0 suppressed
+
+

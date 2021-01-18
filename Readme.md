@@ -4,17 +4,54 @@
 
 Esse código é um exemplo de Led Blink (piscar led) desenvolvido por discentes do IFG para o microcontrolador PIC16F84A, este codigo em especifico pisca o led a cada 0.5 segundos se utilizado um cristal de 4 Khz.
 
-## Execuçao:
+## Execução:
+O programa pode ser executado em um simuldor ou no gravado em um microcontroldador PIC16f84A, é aconselhavel para fins de depuraçao utilizar o simulador uma vez que as ferramentas de debug do simulador são mais intuitivas que realizar a analise na pratica.
 
 ### Simulador:
-Clone o repositorio
-baixe o mplab
-instale o mplab
-abra o projeto 
-execute a simulaçao
+###### 2º Baixe e instale o gerenciador de pacotes rar Winrrar
+ * Click [aqui ](https://www.rarlab.com/download.htm) para realizar o download do Winrrar
+ * Aquarde o download finalizar
+ * Execute o arquivo .exe baixado
+ * Aguarde a instalação finalizar
+###### 1º Baixe e instale o MPLAB IDE v8.92 (Iremos utilizar uma versão mais antiga porem mais estavek do MPLAB, no entanto sinta-se a vontade para utilizar o MPLAB X)
+ * Click [aqui ](https://drive.google.com/file/d/0B53XJ7dLLG26bm9UQnF2RTc3OVk/view) para realizar o download do MPLAB
+ * Aquarde o download finalizar
+ * Descompacte o arquivo zip em um diretorio de sua escolha como mostra o gif abaixo
+    * ![](https://github.com/LucasRangelSSouza/BlinkPIC/blob/main/gifs/descompactando.gif)
+ * Realize a instalação do MPLAB executando o executavel setup.exe
+ * Avance as etapas e aguarde a instalação concluir
+###### 2º Baixe e instale o gerenciador git
+ * Click [aqui ](https://git-scm.com/) para realizar o download do gerenciador git
+ * Aquarde o download finalizar
+ * Execute o arquivo .exe baixado
+ * Aguarde a instalação finalizar
+###### 3º Clone o repositorio BlinkPIC
+* Abra o o terminal de comandos do windows
+* Navegue até um diretorio pre-existente de sua escolha:
+    ```
+    C:\> chdir C:\MeuDiretorio\
+    ```
+* Clone o repositorio BlinkPIC
+    ```
+    C:\> git clone https://github.com/LucasRangelSSouza/BlinkPIC.git
+    ```
+* Aguarde até que o download dos arquivos finalize
+###### 4º Execute o projeto e carregue o arquivo
+* Execute o arquivo BlinkPIC.mcw, o MPLAB ira iniciar automaticamente
+* Carregue o arquivo blink.asm (source code em assembly, é legivel e debugavel)
+    * Carregar blink.asm debugavel
+    
+    * ![](https://github.com/LucasRangelSSouza/BlinkPIC/blob/main/gifs/CarregandoASM.gif)
+
+* Ajuste as configuraçoes como mostrado abaixo para que o MPLAB gere o arquivo .hex, e ajuste a frequencia do simulador para a frequencia desejada (para este experimento foi utilizado 4Khz)
+    
+    ![](https://github.com/LucasRangelSSouza/BlinkPIC/blob/main/gifs/AjustandoConfig.gif)
+
+* Realize a simulação como mostrado abaixo
+    ![](https://github.com/LucasRangelSSouza/BlinkPIC/blob/main/gifs/ExecutandoCodigo.gif)
 
 ### Microcontrolador:
-Grave o arquivo Blink.hex em um pic 
+Não sera apresentado aqui um passo a passo da gravação do programa em um microcontrolador, pois deve-se levar em conta diversos detalhes que não faze parte do escopo da analise atual como modelo e tecnologia utilizada no gravador, emulador serial, modelo do microcontrolador entre outros. No esntanto o arquivo compilado no padrao intel (blink.hex) pode ser gravado em qualquer microcontrolador PIC16F84A.
 
 ## Codigo:
 ```
@@ -81,7 +118,6 @@ DELAYAUX:
 
 END
 ```
-
 ## Operação do codigo:
 
 ### Contagem:
@@ -108,8 +144,7 @@ De acordo com o simulador MPLAB v8.92, se utilizado um cristal de 4Khz temos os 
 
 
 Os dados da tabela acima podem ser conferidos na simulação apresentada no gif abaixo
-
-![](https://github.com/LucasRangelSSouza/BlinkPIC/blob/main/gifs/testPic.gif)
+[](https://github.com/LucasRangelSSouza/BlinkPIC/blob/main/gifs/testPic.gif)
  
  
  No geral sao executadas 5086 instruções em 5 segundos e 86 milissegundo em 10 loops do programa, o que nos da uma media de 508 milisegundos e 600 microssegundos por loop e 1 milisegundo por instrução.
