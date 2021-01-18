@@ -48,7 +48,8 @@ O programa pode ser executado em um simuldor ou no gravado em um microcontroldad
     ![](https://github.com/LucasRangelSSouza/BlinkPIC/blob/main/gifs/AjustandoConfig.gif)
 
 * Realize a simulação como mostrado abaixo
-    ![](https://github.com/LucasRangelSSouza/BlinkPIC/blob/main/gifs/ExecutandoCodigo.gif)
+    
+	![](https://github.com/LucasRangelSSouza/BlinkPIC/blob/main/gifs/ExecutandoCodigo.gif)
 
 ### Microcontrolador:
 Não sera apresentado aqui um passo a passo da gravação do programa em um microcontrolador, pois deve-se levar em conta diversos detalhes que não faze parte do escopo da analise atual como modelo e tecnologia utilizada no gravador, emulador serial, modelo do microcontrolador entre outros. No esntanto o arquivo compilado no padrao intel (blink.hex) pode ser gravado em qualquer microcontrolador PIC16F84A.
